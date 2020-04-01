@@ -1,0 +1,110 @@
+const inquirer = require('inquirer')
+
+const askForCredentials = () =>{
+    const questions = [
+        {
+            name: 'accessToken',
+            type: 'input',
+            message: 'Enter your access token',
+            validate: function(value) {
+                if (value.length){
+                    return true
+                } else {
+                    return 'Please enter your access token'
+                }
+            }
+        },
+        {
+            name: 'accountId',
+            type: 'input',
+            message: 'Enter your Harvest account id',
+            validate: function(value) {
+                if (value.length){
+                    return true
+                } else {
+                    return 'Please enter your Harvest account id'
+                }
+            }
+        },
+        {
+            name: 'userAgent',
+            type: 'input',
+            message: 'Enter your user agent',
+            validate: function(value) {
+                if (value.length){
+                    return true
+                } else {
+                    return 'Please enter your user agent'
+                }
+            }
+        }
+    ]
+    return inquirer.prompt(questions)
+}
+
+const askForDates = () => {
+    const questions = [
+        {
+            type: 'datetime',
+            name: 'date1',
+            message: 'Enter from date: (Format yyyy mm dd)',
+            filter: value => {
+                return value.replace(/ /g,'')
+            }
+        },
+        {
+            type: 'datetime',
+            name: 'date2',
+            message: 'Enter to date: (Format yyyy mm dd)',
+            filter: value => {
+                return value.replace(/ /g,'')
+            }
+        },
+    ]
+    return inquirer.prompt(questions)
+}
+
+const askForProjectId = () => {
+    const questions = [
+        {
+            name: 'projectId',
+            type: 'input',
+            message: 'Enter the project ID: ',
+            validate: function(value) {
+                if (value.length){
+                    return true
+                } else {
+                    return 'Please enter a valid project ID'
+                }
+            }
+        },
+    ]
+    return inquirer.prompt(questions)
+}
+
+const askForAction = () => {
+    const questions = [
+        {
+            name: 'index',
+            type: 'list',
+            message: 'Choose: ',
+            choices: [
+                '1. Get projects',
+                '2. Help'
+            ],
+            filter: value => {
+                return parseInt(value[0])
+            }
+        },
+    ]
+    return inquirer.prompt(questions)
+}
+
+
+
+module.exports = {
+    askForCredentials,
+    askForDates,
+    askForProjectId,
+    askForAction
+}

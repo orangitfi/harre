@@ -1,0 +1,23 @@
+{
+  "name": "report-cli",
+  "version": "1.0.0",
+  "description": "Retrieves time reports",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kasper Paavolainen",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^5.0.1",
+    "inquirer": "^7.1.0",
+    "minimist": "^1.2.5"
+  },
+  "bin": {
+    "projects-cli": "./index.js"
+  }
+}
