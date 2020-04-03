@@ -12,8 +12,17 @@ const formatDate = (date) => {
 
 const getCurrentDate = () => {
     const currentDate = new Date()
-    const correctFormatDate = formatDate(currentDate)
-    return correctFormatDate
+    return currentDate
+}
+
+const getLastWeekDates = () => {
+    return createLastWeekDate(new Date())
+}
+
+const getOneWeekEarlierDate = () => {
+    const currentDate = new Date()
+    currentDate.setDate(currentDate.getDate() - 7)
+    return currentDate
 }
 
 const createLastWeekDate = (date) => {
@@ -26,25 +35,15 @@ const createLastWeekDate = (date) => {
     const toDate = new Date(fromDate)
     toDate.setDate(toDate.getDate() + 6)
 
-    return getDatesObject(formatDate(fromDate), formatDate(toDate))
+    return getDatesObject(fromDate, toDate)
 }
 
-const getLastWeekDates = () => {
-    return createLastWeekDate(new Date())
-}
-
-const getOneWeekEarlierDate = () => {
-    const currentDate = new Date()
-    currentDate.setDate(currentDate.getDate() - 7)
-    const correctFormatDate = formatDate(currentDate)
-    return correctFormatDate
-}
 
 const getDatesObject = (dateFrom = getOneWeekEarlierDate(),
                         dateTo = getCurrentDate()) => {
     const datesObject = {
-        dateFrom: dateFrom,
-        dateTo: dateTo
+        dateFrom: formatDate(dateFrom),
+        dateTo: formatDate(dateTo)
     }
     return datesObject
 }
