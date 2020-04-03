@@ -15,7 +15,8 @@ const printHelp = () => {
     < project id > < from date > < to date >: Finds all time entries from a project, between the given time frame. Dates are optional. You may only use the from date.
     -g: Returns all projects
     -f <Project name>: Finds a project where the name contains search word
-    -c: Returns as CSV
+    -j: Returns output as Json
+    -l: Returns last weeks entries
     --init: Allows to re-enter users credentials
     --help: Prints out help
     -j: Return as Json object

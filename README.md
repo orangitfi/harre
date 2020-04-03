@@ -12,9 +12,10 @@ You may add `<From date>` and `<To date>`, thus filtering the output between two
 Flags:
    * -g: Returns all projects
    * -f <Project name>: Finds a project where the name contains search word
+   * -j: Return output as Json   
+   * -l: Returns last weeks entries  
    * --init: Enter users credentials
    * --help: Prints out help
-   * -j: Return output as Json   
    
 ## Examples  
 Finds entries for the project for the project id 123456, between 1.3.2020 and the current day.  
