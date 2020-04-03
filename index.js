@@ -47,6 +47,7 @@ const run = async () => {
             } else {
                 date = dateService.getDatesObject(dateFrom, dateTo)
             }
+            console.log(date)
             result = await harvest.getEntriesForProject(id, date)
             break
         case argv.g:

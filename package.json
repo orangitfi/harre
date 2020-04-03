@@ -1,6 +1,6 @@
 {
   "name": "harre",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Retrieves time reports",
   "main": "index.js",
   "scripts": {

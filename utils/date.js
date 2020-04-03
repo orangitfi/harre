@@ -26,7 +26,7 @@ const createLastWeekDate = (date) => {
     const toDate = new Date(fromDate)
     toDate.setDate(toDate.getDate() + 6)
 
-    return (getDatesObject(fromDate, toDate))
+    return getDatesObject(formatDate(fromDate), formatDate(toDate))
 }
 
 const getLastWeekDates = () => {
