@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-const clear = require('clear')
-const inquirer = require('./lib/inquirer')
 const harvest = require('./lib/harvest')
 const pkg = require('./package')
 const NAME = pkg.name
@@ -47,7 +45,6 @@ const run = async () => {
             } else {
                 date = dateService.getDatesObject(dateFrom, dateTo)
             }
-            console.log(date)
             result = await harvest.getEntriesForProject(id, date)
             break
         case argv.g:
