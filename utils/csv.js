@@ -17,10 +17,6 @@ const toMinimalCSV = (items) => {
                 label: 'Notes'
             },
             {
-                name: 'notes',
-                label: 'Notes'
-            },
-            {
                 name: 'hours',
                 label: 'Hours'
             },

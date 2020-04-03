@@ -32,7 +32,6 @@ const run = async () => {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
 
-    console.log(argv)
 
     let date, result
     switch (true) {
@@ -65,21 +64,15 @@ const run = async () => {
             console.log(`${NAME}: try '${NAME} --help' for more information`)
             break
     }
-    switch (true) {
-        case argv.j:
-            break
-        case argv.min:
-            console.log("tääl")
+
+    if (result){
+        if (argv.min){
             result = csvService.toMinimalCSV(Object.values(result)[0])
-            break
-        default:
-            console.log(argv)
-            console.log("ei tääl")
+        } else if (!argv.j){
             result = csvService.toFullCSV(Object.values(result)[0])
-            break
+        }
     }
     if (result) console.log(result)
 }
 
-//clear()
 run()
