@@ -5,34 +5,17 @@ const harvest = require('./lib/harvest')
 const pkg = require('./package')
 const NAME = pkg.name
 const dateService = require('./utils/date')
+const csvService = require('./utils/csv')
 
-const interactive = async () => {
-    const action = await inquirer.askForAction()
-    actionToPerform(action.index)
-}
-
-const actionToPerform = async (action) => {
-    switch (action) {
-        case 1:
-            harvest.get()
-            break
-        case 2:
-            printHelp()
-            break
-        default:
-            console.log("defaultti")
-            break
-    }
-}
 
 const printHelp = () => {
     console.log(`
     ${NAME}, CLI tool that fetches reports from Harvest.
     Commands: \n
-    < project id > < from date > < to date >: Finds all time entries from a project, between the given time frame.
+    < project id > < from date > < to date >: Finds all time entries from a project, between the given time frame. Dates are optional. You may only use the from date.
     -g: Returns all projects
     -f <Project name>: Finds a project where the name contains search word
-    -u: Launches interactive mode
+    -c: Returns as CSV
     --init: Allows to re-enter users credentials
     --help: Prints out help
     
@@ -49,21 +32,12 @@ const run = async () => {
         return
     }
 
-    console.log(argv._.length)
-    console.log(argv)
-
-
     let date, result
     switch (true) {
-        case argv._.length == 3:
+        case argv._.length >= 1:
             const [id, dateFrom, dateTo] = argv._
-            date = dateService.getDatesObject(dateFrom, dateTo)
+            date = dateService.getDatesObject(dateFrom,dateTo)
             result = await harvest.getEntriesForProject(id, date)
-            break
-        case argv._.length == 1:
-            const singleId = argv._[0]
-            date = dateService.getDatesObject()
-            result = await harvest.getEntriesForProject(singleId, date)
             break
         case argv.g:
             result = await harvest.get()
@@ -84,8 +58,11 @@ const run = async () => {
             console.log(`${NAME}: try '${NAME} --help' for more information`)
             break
     }
-    if (result) console.log(result)
+    if (!argv.j && result){
+        result =  csvService.toCSV(Object.values(result)[0])
+    }
+    console.log(result)
 }
 
-clear()
+//clear()
 run()
