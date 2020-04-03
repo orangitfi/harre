@@ -15,6 +15,7 @@ const printHelp = () => {
     -f <Project name>: Finds a project where the name contains search word
     -j: Returns output as Json
     -l: Returns last weeks entries
+    --min: Returns minimal CSV with the following columns: Date, Notes, Hours and Employee number
     --init: Allows to re-enter users credentials
     --help: Prints out help
     -j: Return as Json object
@@ -31,6 +32,7 @@ const run = async () => {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
 
+    console.log(argv)
 
     let date, result
     switch (true) {
@@ -63,8 +65,18 @@ const run = async () => {
             console.log(`${NAME}: try '${NAME} --help' for more information`)
             break
     }
-    if (!argv.j && result) {
-        result = csvService.toCSV(Object.values(result)[0])
+    switch (true) {
+        case argv.j:
+            break
+        case argv.min:
+            console.log("tääl")
+            result = csvService.toMinimalCSV(Object.values(result)[0])
+            break
+        default:
+            console.log(argv)
+            console.log("ei tääl")
+            result = csvService.toFullCSV(Object.values(result)[0])
+            break
     }
     if (result) console.log(result)
 }

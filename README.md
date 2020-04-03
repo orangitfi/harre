@@ -13,7 +13,8 @@ Flags:
    * -g: Returns all projects
    * -f <Project name>: Finds a project where the name contains search word
    * -j: Return output as Json   
-   * -l: Returns last weeks entries  
+   * -l: Returns last weeks entries 
+   * --min: Returns minimal CSV with the following columns: Date, Notes, Hours and Employee number  
    * --init: Enter users credentials
    * --help: Prints out help
    
