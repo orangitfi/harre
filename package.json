@@ -1,6 +1,6 @@
 {
   "name": "harre",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Retrieves time reports",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
-    "clear": "^0.1.0",
-    "clui": "^0.3.6",
     "configstore": "^5.0.1",
     "inquirer": "^7.1.0",
     "json-csv": "^3.0.1",

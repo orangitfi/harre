@@ -71,8 +71,8 @@ const run = async () => {
         } else if (!argv.j){
             result = csvService.toFullCSV(Object.values(result)[0])
         }
+        console.log(result)
     }
-    if (result) console.log(result)
 }
 
 run()
