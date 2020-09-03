@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import {combineArguments} from "./utils/stringHandler";
+const {combineArguments} = require("./utils/stringHandler")
+const {checkCredentials, getPersonalAuthentication} = require("./lib/authentication")
 
 const harvest = require('./lib/harvest')
 const pkg = require('./package')
@@ -20,7 +21,6 @@ const printHelp = () => {
     --min: Returns minimal CSV with the following columns: Date, Notes, Hours and Employee number
     --init: Allows to re-enter users credentials
     --help: Prints out help
-    -j: Return as Json object
     `)
 }
 
@@ -30,8 +30,7 @@ const run = async () => {
     const argv = require('minimist')(process.argv.slice(2),
         {default: {}})
 
-
-    if (!harvest.checkCredentials()) {
+    if (!checkCredentials()) {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
 
@@ -55,14 +54,11 @@ const run = async () => {
         case argv.g:
             result = await harvest.get()
             break
-        case argv.i:
-            await interactive()
-            break
         case argv.help:
             printHelp()
             break
         case argv.init:
-            harvest.getPersonalAuthentication()
+            await getPersonalAuthentication()
             break
         default:
             console.log(`${NAME}: try '${NAME} --help' for more information`)
