@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import {combineArguments} from "./utils/stringHandler";
+
 const harvest = require('./lib/harvest')
 const pkg = require('./package')
 const NAME = pkg.name
@@ -23,6 +25,7 @@ const printHelp = () => {
 }
 
 
+
 const run = async () => {
     const argv = require('minimist')(process.argv.slice(2),
         {default: {}})
@@ -36,9 +39,10 @@ const run = async () => {
     let date, result
     switch (true) {
         case argv.f && argv.f.length > 0:
-            const name = argv.f
+            const name = combineArguments(argv, 'f')
             result = await harvest.findProject(name)
-            break
+            console.log(result)
+            return
         case argv._.length >= 1:
             const [id, dateFrom, dateTo] = argv._
             if (argv.l) {
