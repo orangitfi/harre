@@ -16,6 +16,7 @@ const printHelp = () => {
     < project id > < from date > < to date >: Finds all time entries from a project, between the given time frame. Dates are optional. You may only use the from date.
     -g: Returns all projects
     -f <Project name>: Finds a project where the name contains search word
+    -h <Project name>: Returns all recorded hours for the given project
     -j: Returns output as Json
     -l: Returns last weeks entries
     --min: Returns minimal CSV with the following columns: Date, Notes, Hours and Employee number
