@@ -1,9 +1,13 @@
 # Harvest Report CLI  
 CLI tool that allows you to retrieve time entries for a specific project.  
 
+## How to get access token  
+Generate a new personal access token from ``https://id.getharvest.com/developers``  
+
+
 ## How to install
 Install the tool by running `npm i -g harre`.  
-After the installation, run ``harre --init`` to add your Harvest API credentials.  
+After the installation, run ``harre --init`` to add your Harvest API credentials.  As user agent, you can put ``harre`  
 
 ## How to use.  
 Find entries for certain project by running ``harre <Project id>``.  The output will be in a CSV format.  
