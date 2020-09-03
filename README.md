@@ -16,6 +16,7 @@ You may add `<From date>` and `<To date>`, thus filtering the output between two
 Flags:
    * -g: Returns all projects
    * -f <Project name>: Finds a project where the name contains given search word
+   * -h <Project name>: Returns the sum of recorded hours for the given project.
    * -j: Return output as Json   
    * -l: Returns last weeks entries 
    * --min: Returns minimal CSV with the following columns: Date, Notes, Hours and Employee number  
