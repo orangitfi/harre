@@ -2,9 +2,14 @@ const jsoncsv = require('json-csv')
 //Date,Client,Project,Project Code,Task,Notes,Hours,Billable?,Invoiced?,
 // Approved?,First Name,Last Name,Employee?,External Reference URL
 
-//Approved missing.
-//First name and Last name are combined
-//Employee? missing.
+const toCSV= (items,options) => {
+    jsoncsv.buffered(items,options,
+        (err,csv) => {
+            console.log(csv)
+        })
+
+}
+
 const toMinimalCSV = (items) => {
     const options = {
         fields: [
@@ -29,13 +34,6 @@ const toMinimalCSV = (items) => {
     return toCSV(items,options)
 }
 
-const toCSV= (items,options) => {
-    jsoncsv.buffered(items,options,
-    (err,csv) => {
-        console.log(csv)
-    })
-
-}
 
 const toFullCSV = (items) => {
     const options = {
@@ -94,7 +92,25 @@ const toFullCSV = (items) => {
     return toCSV(items, options)
 }
 
+const projectDataToCsv = (items) => {
+    const options = {
+        fields: [
+            {
+                name: 'name',
+                label: 'Project name'
+            },
+            {
+                name: 'client.name',
+                label: 'Client'
+            },
+        ],
+    }
+    return toCSV(items,options)
+}
+
+
 module.exports = {
     toFullCSV,
-    toMinimalCSV
+    toMinimalCSV,
+    projectDataToCsv
 }

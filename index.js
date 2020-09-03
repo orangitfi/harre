@@ -52,7 +52,7 @@ const run = async () => {
             result = await harvest.getEntriesForProject(id, date)
             break
         case argv.g:
-            result = await harvest.get()
+            result = await harvest.getProjects()
             break
         case argv.help:
             printHelp()
@@ -67,11 +67,14 @@ const run = async () => {
 
     if (result){
         if (argv.min){
-            result = csvService.toMinimalCSV(Object.values(result)[0])
-        } else if (!argv.j){
-            result = csvService.toFullCSV(Object.values(result)[0])
+             csvService.toMinimalCSV(Object.values(result)[0])
+        } else if (argv.g) {
+             csvService.projectDataToCsv(Object.values(result)[0])
+          }else if (!argv.j){
+             csvService.toFullCSV(Object.values(result)[0])
+        } else {
+            console.log(result)
         }
-        console.log(result)
     }
 }
 
