@@ -96,6 +96,10 @@ const projectDataToCsv = (items) => {
     const options = {
         fields: [
             {
+              name: 'id',
+              label: 'ID'
+            },
+            {
                 name: 'name',
                 label: 'Project name'
             },

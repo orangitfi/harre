@@ -34,6 +34,8 @@ const run = async () => {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
 
+    console.log(dateService.getLastMonthsDate())
+
 
     let date, result
     switch (true) {

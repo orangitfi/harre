@@ -10,17 +10,14 @@ const formatDate = (date) => {
     return "" + year + month + day
 }
 
-const getCurrentDate = () => {
-    const currentDate = new Date()
-    return currentDate
-}
+const currentDate = new Date()
+
 
 const getLastWeekDates = () => {
-    return createLastWeekDate(new Date())
+    return createLastWeekDate(currentDate)
 }
 
 const getOneWeekEarlierDate = () => {
-    const currentDate = new Date()
     currentDate.setDate(currentDate.getDate() - 7)
     return currentDate
 }
@@ -35,12 +32,25 @@ const createLastWeekDate = (date) => {
     const toDate = new Date(fromDate)
     toDate.setDate(toDate.getDate() + 6)
 
-    return getDatesObject(fromDate, toDate)
+    return createDatesObject(fromDate, toDate)
+}
+
+const getLastMonthsDate = () => {
+    return createLastMonthsDate(currentDate)
+
+}
+
+const createLastMonthsDate = (date) => {
+    const lastMonthsDate = new Date(date.setMonth(date.getMonth() - 1))
+
+    return createDatesObject(lastMonthsDate)
+
 }
 
 
-const getDatesObject = (dateFrom = getOneWeekEarlierDate(),
-                        dateTo = getCurrentDate()) => {
+const createDatesObject = (dateFrom = getOneWeekEarlierDate(),
+                           dateTo = currentDate) => {
+
     const datesObject = {
         dateFrom: formatDate(dateFrom),
         dateTo: formatDate(dateTo)
@@ -50,6 +60,7 @@ const getDatesObject = (dateFrom = getOneWeekEarlierDate(),
 
 module.exports = {
     isValidDate,
-    getDatesObject,
-    getLastWeekDates
+    getDatesObject: createDatesObject,
+    getLastWeekDates,
+    getLastMonthsDate
 }
