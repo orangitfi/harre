@@ -34,16 +34,18 @@ const run = async () => {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
 
-    console.log(dateService.getLastMonthsDate())
-
 
     let date, result
     switch (true) {
         case argv.f && argv.f.length > 0:
-            const name = combineArguments(argv, 'f')
-            result = await harvest.findProject(name)
+            combineArguments(argv, 'f')
+            result = await harvest.findProject(combineArguments(argv, 'f'))
             console.log(result)
             return
+        case argv.h && argv.h.length > 0:
+            date = dateService.getLastMonthsDate()
+            result = await harvest.getHours(combineArguments(argv, 'h'), date)
+            break
         case argv._.length >= 1:
             const [id, dateFrom, dateTo] = argv._
             if (argv.l) {

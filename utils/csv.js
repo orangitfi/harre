@@ -107,6 +107,10 @@ const projectDataToCsv = (items) => {
                 name: 'client.name',
                 label: 'Client'
             },
+            {
+                name: 'is_active',
+                labe: 'is active?'
+            }
         ],
     }
     return toCSV(items,options)

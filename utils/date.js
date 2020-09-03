@@ -18,8 +18,8 @@ const getLastWeekDates = () => {
 }
 
 const getOneWeekEarlierDate = () => {
-    currentDate.setDate(currentDate.getDate() - 7)
-    return currentDate
+    const newDate =  new Date(currentDate.setDate(currentDate.getDate() - 7))
+    return newDate
 }
 
 const createLastWeekDate = (date) => {
@@ -49,7 +49,7 @@ const createLastMonthsDate = (date) => {
 
 
 const createDatesObject = (dateFrom = getOneWeekEarlierDate(),
-                           dateTo = currentDate) => {
+                           dateTo = new Date()) => {
 
     const datesObject = {
         dateFrom: formatDate(dateFrom),
