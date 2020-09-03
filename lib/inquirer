@@ -100,11 +100,25 @@ const askForAction = () => {
     return inquirer.prompt(questions)
 }
 
+const askForProject = (projects) => {
+    const questions = [
+        {
+            name: 'name',
+            type: 'list',
+            message: 'Choose: ',
+            choices: projects
+
+        },
+    ]
+    return inquirer.prompt(questions)
+}
+
 
 
 module.exports = {
     askForCredentials,
     askForDates,
     askForProjectId,
-    askForAction
+    askForAction,
+    askForProject
 }
