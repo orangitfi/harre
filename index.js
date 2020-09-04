@@ -56,6 +56,17 @@ const getProjectEntries = async args => {
   return await harvest.getEntriesForProject(id, date)
 }
 
+const findProjects = async (args)=> {
+  combineArguments(args, 'f')
+  const result = await harvest.findProject(combineArguments(argv, 'f'))
+  console.log(result)
+}
+
+const getProjectHours = async (args) => {
+  const date = dateService.getLastMonthsDate()
+ return await harvest.getHours(combineArguments(args, 'h'), date)
+}
+
 const run = async () => {
   const argv = require('minimist')(process.argv.slice(2), {default: {}})
 
@@ -66,13 +77,10 @@ const run = async () => {
   let date, result
   switch (true) {
     case argv.f && argv.f.length > 0:
-      combineArguments(argv, 'f')
-      result = await harvest.findProject(combineArguments(argv, 'f'))
-      console.log(result)
+      await findProjects(argv)
       return
     case argv.h && argv.h.length > 0:
-      date = dateService.getLastMonthsDate()
-      result = await harvest.getHours(combineArguments(argv, 'h'), date)
+      result = await getProjectHours(argv)
       break
     case argv._.length >= 1:
       result = await getProjectEntries(argv)
