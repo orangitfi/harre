@@ -25,12 +25,17 @@ Flags:
    
 ## Examples.  
 Find the projects information with only the name:
-`harre -f <project name>`
+`harre -f <Project name>`
+If there are multiple, you need to select one of them.
 
 Finds entries for the project with the id 123456, between 1.3.2020 and the current date:  
 `harre <Project id> <From date>`  
 `harre 123456 20200301`  
 Returns found entries in a CSV format.  
+
+Get all last weeks entries for certain project:
+`harre <Project id> -l`
+Return last weeks entries in a CSV format.
 
 Find project where the name contains given search word.  
 `harre -f <Project id> -j`  
