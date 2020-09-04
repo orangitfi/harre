@@ -4,7 +4,7 @@
   "description": "Retrieves time reports",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "Kasper Paavolainen",
@@ -20,6 +20,8 @@
     "harre": "./index.js"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
     "prettier": "^2.1.1"
   }
 }
