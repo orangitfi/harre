@@ -10,8 +10,12 @@ Install the tool by running `npm i -g harre`.
 After the installation, run ``harre --init`` to add your Harvest API credentials.  As user agent, you can put ``harre`  
 
 ## How to use.  
-Find entries for certain project by running ``harre <Project id>``.  The output will be in a CSV format.  
-You may add `<From date>` and `<To date>`, thus filtering the output between two dates. Otherwise the output will be entries from one week ago to the current date.  
+Find entries for certain project by running ``harre <Project id>`` or ``harre <Project name>``.  The output will be in a CSV format.  
+You may add `<From date>` and `<To date>`, thus filtering the output between two dates. Otherwise the output will be entries from one week ago to the current date.    
+
+You can also use months to search all entries for that given month:  
+ `harre <Project name> 12`  
+ This will return decembers entries for the project.
 
 Flags:
    * -g: Returns all projects
@@ -32,6 +36,10 @@ Finds entries for the project with the id 123456, between 1.3.2020 and the curre
 `harre <Project id> <From date>`  
 `harre 123456 20200301`  
 Returns found entries in a CSV format.  
+
+Get all entries for a project between current day and seven days ago:  
+`harre <Project name>`  
+e.g. 07.02.2020 - 15.02.2020
 
 Get all last weeks entries for certain project:
 `harre <Project id> -l`
