@@ -1,8 +1,5 @@
 #!/usr/bin/env node
-const {
-  combineArguments,
-  groupArguments,
-} = require('./utils/stringHandler')
+const {combineArguments, groupArguments} = require('./utils/stringHandler')
 const {
   checkCredentials,
   getPersonalAuthentication,
@@ -55,13 +52,13 @@ const getProjectEntries = async args => {
   return await harvest.getEntriesForProject(id, date)
 }
 
-const findProjects = async (args) => {
+const findProjects = async args => {
   combineArguments(args, 'f')
   const result = await harvest.findProject(combineArguments(args, 'f'))
   console.log(result)
 }
 
-const getProjectHours = async (args) => {
+const getProjectHours = async args => {
   const date = dateService.getLastMonthsDate()
   return await harvest.getHours(combineArguments(args, 'h'), date)
 }
@@ -72,7 +69,7 @@ const run = async () => {
   if (!checkCredentials()) {
     console.log(`Missing credentials, please use '${NAME} --init'`)
   }
- 
+
   let result
   switch (true) {
     case argv.f && argv.f.length > 0:
