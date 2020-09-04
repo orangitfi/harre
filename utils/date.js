@@ -1,9 +1,13 @@
-//Add better date validation
-const isValidDate = (date) => {
-    //return date.toString() instanceof Date && (isNaN(date))
-    return date.toString().length === 8
+
+const validDateRegex = /(20\d{2}[0-1]\d[0-3]\d)/
+
+const alreadyFormattedDate = (date) => {
+    return validDateRegex.test(date)
 }
+
+
 const formatDate = (date) => {
+    if (alreadyFormattedDate(date)) return date
     const year = date.getFullYear()
     const month = ("0" + (date.getMonth() + 1)).slice(-2)
     const day = ("0" + date.getDate()).slice(-2)
@@ -13,13 +17,14 @@ const formatDate = (date) => {
 const currentDate = new Date()
 
 
-const getLastWeekDates = () => {
-    return createLastWeekDate(currentDate)
-}
 
 const getOneWeekEarlierDate = () => {
     const newDate =  new Date(currentDate.setDate(currentDate.getDate() - 7))
     return newDate
+}
+
+const getLastWeekDates = () => {
+    return createLastWeekDate(currentDate)
 }
 
 const createLastWeekDate = (date) => {
@@ -42,7 +47,6 @@ const getLastMonthsDate = () => {
 
 const createLastMonthsDate = (date) => {
     const lastMonthsDate = new Date(date.setMonth(date.getMonth() - 1))
-
     return createDatesObject(lastMonthsDate)
 
 }
@@ -59,7 +63,6 @@ const createDatesObject = (dateFrom = getOneWeekEarlierDate(),
 }
 
 module.exports = {
-    isValidDate,
     getDatesObject: createDatesObject,
     getLastWeekDates,
     getLastMonthsDate

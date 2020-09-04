@@ -26,7 +26,6 @@ const printHelp = () => {
 }
 
 
-
 const run = async () => {
     const argv = require('minimist')(process.argv.slice(2),
         {default: {}})
@@ -34,7 +33,6 @@ const run = async () => {
     if (!checkCredentials()) {
         console.log(`Missing credentials, please use '${NAME} --init'`)
     }
-
 
     let date, result
     switch (true) {
@@ -69,14 +67,13 @@ const run = async () => {
             console.log(`${NAME}: try '${NAME} --help' for more information`)
             break
     }
-
-    if (result){
-        if (argv.min){
-             csvService.toMinimalCSV(Object.values(result)[0])
+    if (result) {
+        if (argv.min) {
+            csvService.toMinimalCSV(Object.values(result)[0])
         } else if (argv.g) {
-             csvService.projectDataToCsv(Object.values(result)[0])
-          }else if (!argv.j){
-             csvService.toFullCSV(Object.values(result)[0])
+            csvService.projectDataToCsv(Object.values(result)[0])
+        } else if (!argv.j) {
+            csvService.toFullCSV(Object.values(result)[0])
         } else {
             console.log(result)
         }
