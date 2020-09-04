@@ -25,6 +25,16 @@ const printHelp = () => {
     `)
 }
 
+const handleDate = (dateFrom, dateTo, lastWeek) => {
+    if (lastWeek) {
+        return dateService.getLastWeekDates()
+    } else if (dateService.validMonth(dateFrom)) {
+        return dateService.getMonthDateObject(dateFrom)
+    } else {
+        return dateService.getDatesObject(dateFrom, dateTo)
+    }
+}
+
 
 const run = async () => {
     const argv = require('minimist')(process.argv.slice(2),
@@ -47,11 +57,7 @@ const run = async () => {
             break
         case argv._.length >= 1:
             const [id, dateFrom, dateTo] = argv._
-            if (argv.l) {
-                date = dateService.getLastWeekDates()
-            } else {
-                date = dateService.getDatesObject(dateFrom, dateTo)
-            }
+            date = handleDate(dateFrom, dateTo, argv.l)
             result = await harvest.getEntriesForProject(id, date)
             break
         case argv.g:
