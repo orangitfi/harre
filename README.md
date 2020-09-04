@@ -24,6 +24,9 @@ Flags:
    * --help: Prints out help
    
 ## Examples.  
+Find the projects information with only the name:
+`harre -f <project name>`
+
 Finds entries for the project with the id 123456, between 1.3.2020 and the current date:  
 `harre <Project id> <From date>`  
 `harre 123456 20200301`  
