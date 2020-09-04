@@ -55,3 +55,6 @@ Create a merge request for any modifications to the source code.
 To publish the new version to NPM registery, you have to be in the owner group. Please contanct `Uberballo` to be added to the group.  
 To publish, make sure you have the newest working version, then run `npm publish`.  
 
+### Tests
+some of the test require working API key, if you don't have the required credentials, try to avoid developing them.  
+Run them by using `npm test`  
