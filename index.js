@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const {combineArguments} = require("./utils/stringHandler")
+const {combineArguments, isId} = require("./utils/stringHandler")
 const {checkCredentials, getPersonalAuthentication} = require("./lib/authentication")
 
 const harvest = require('./lib/harvest')

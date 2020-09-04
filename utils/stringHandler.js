@@ -5,6 +5,12 @@ const combineArguments = (args, key) => {
     return result
 }
 
+const isId = (id) => {
+    const onlyNumbersRegex = /^[0-9]+$/
+    return onlyNumbersRegex.test(id)
+}
+
 module.exports = {
-    combineArguments
+    combineArguments,
+    isId
 }
