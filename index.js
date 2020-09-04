@@ -1,6 +1,13 @@
 #!/usr/bin/env node
-const {combineArguments, isId} = require("./utils/stringHandler")
-const {checkCredentials, getPersonalAuthentication} = require("./lib/authentication")
+const {
+  combineArguments,
+  isId,
+  groupArguments,
+} = require('./utils/stringHandler')
+const {
+  checkCredentials,
+  getPersonalAuthentication,
+} = require('./lib/authentication')
 
 const harvest = require('./lib/harvest')
 const pkg = require('./package')
@@ -8,9 +15,8 @@ const NAME = pkg.name
 const dateService = require('./utils/date')
 const csvService = require('./utils/csv')
 
-
 const printHelp = () => {
-    console.log(`
+  console.log(`
     ${NAME}, CLI tool that fetches reports from Harvest.
     Commands: \n
     <project id> <from date> <to date>: Finds all time entries from a project, between the given time frame. Dates are optional.
@@ -26,66 +32,75 @@ const printHelp = () => {
 }
 
 const handleDate = (dateFrom, dateTo, lastWeek) => {
-    if (lastWeek) {
-        return dateService.getLastWeekDates()
-    } else if (dateService.validMonth(dateFrom)) {
-        return dateService.getMonthDateObject(dateFrom)
-    } else {
-        return dateService.getDatesObject(dateFrom, dateTo)
-    }
+  if (lastWeek) {
+    return dateService.getLastWeekDates()
+  } else if (dateService.validMonth(dateFrom)) {
+    return dateService.getMonthDateObject(dateFrom)
+  } else {
+    return dateService.getDatesObject(dateFrom, dateTo)
+  }
 }
 
+const getProjectEntries = async args => {
+  const groupedArguments = groupArguments(args._)
+  if (groupedArguments.name) {
+    const [dateFrom, dateTo] = groupedArguments.numbers
+    const date = handleDate(dateFrom, dateTo)
+    return await harvest.getEntriesForProjectWithName(
+      groupedArguments.name,
+      date,
+    )
+  }
+  const [id, dateFrom, dateTo] = args._
+  const date = handleDate(dateFrom, dateTo, args.l)
+  return await harvest.getEntriesForProject(id, date)
+}
 
 const run = async () => {
-    const argv = require('minimist')(process.argv.slice(2),
-        {default: {}})
+  const argv = require('minimist')(process.argv.slice(2), {default: {}})
 
-    if (!checkCredentials()) {
-        console.log(`Missing credentials, please use '${NAME} --init'`)
+  if (!checkCredentials()) {
+    console.log(`Missing credentials, please use '${NAME} --init'`)
+  }
+  console.log(argv)
+  let date, result
+  switch (true) {
+    case argv.f && argv.f.length > 0:
+      combineArguments(argv, 'f')
+      result = await harvest.findProject(combineArguments(argv, 'f'))
+      console.log(result)
+      return
+    case argv.h && argv.h.length > 0:
+      date = dateService.getLastMonthsDate()
+      result = await harvest.getHours(combineArguments(argv, 'h'), date)
+      break
+    case argv._.length >= 1:
+      result = await getProjectEntries(argv)
+      break
+    case argv.g:
+      result = await harvest.getProjects()
+      break
+    case argv.help:
+      printHelp()
+      break
+    case argv.init:
+      await getPersonalAuthentication()
+      break
+    default:
+      console.log(`${NAME}: try '${NAME} --help' for more information`)
+      break
+  }
+  if (result) {
+    if (argv.min) {
+      csvService.toMinimalCSV(Object.values(result)[0])
+    } else if (argv.g) {
+      csvService.projectDataToCsv(Object.values(result)[0])
+    } else if (!argv.j) {
+      csvService.toFullCSV(Object.values(result)[0])
+    } else {
+      console.log(result)
     }
-
-    let date, result
-    switch (true) {
-        case argv.f && argv.f.length > 0:
-            combineArguments(argv, 'f')
-            result = await harvest.findProject(combineArguments(argv, 'f'))
-            console.log(result)
-            return
-        case argv.h && argv.h.length > 0:
-            date = dateService.getLastMonthsDate()
-            result = await harvest.getHours(combineArguments(argv, 'h'), date)
-            break
-        case argv._.length >= 1:
-            const [id, dateFrom, dateTo] = argv._
-            date = handleDate(dateFrom, dateTo, argv.l)
-            result = isId(id)
-                ? await harvest.getEntriesForProject(id, date)
-                : await harvest.getEntriesForProjectWithName(id, date)
-            break
-        case argv.g:
-            result = await harvest.getProjects()
-            break
-        case argv.help:
-            printHelp()
-            break
-        case argv.init:
-            await getPersonalAuthentication()
-            break
-        default:
-            console.log(`${NAME}: try '${NAME} --help' for more information`)
-            break
-    }
-    if (result) {
-        if (argv.min) {
-            csvService.toMinimalCSV(Object.values(result)[0])
-        } else if (argv.g) {
-            csvService.projectDataToCsv(Object.values(result)[0])
-        } else if (!argv.j) {
-            csvService.toFullCSV(Object.values(result)[0])
-        } else {
-            console.log(result)
-        }
-    }
+  }
 }
 
 run()

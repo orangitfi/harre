@@ -18,5 +18,8 @@
   },
   "bin": {
     "harre": "./index.js"
+  },
+  "devDependencies": {
+    "prettier": "^2.1.1"
   }
 }
