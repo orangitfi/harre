@@ -1,4 +1,3 @@
-
 const validDateRegex = /(20\d{2}[0-1]\d[0-3]\d)/
 
 const alreadyFormattedDate = (date) => {
@@ -17,9 +16,8 @@ const formatDate = (date) => {
 const currentDate = new Date()
 
 
-
 const getOneWeekEarlierDate = () => {
-    const newDate =  new Date(currentDate.setDate(currentDate.getDate() - 7))
+    const newDate = new Date(currentDate.setDate(currentDate.getDate() - 7))
     return newDate
 }
 

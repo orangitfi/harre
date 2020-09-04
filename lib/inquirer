@@ -1,13 +1,13 @@
 const inquirer = require('inquirer')
 
-const askForCredentials = () =>{
+const askForCredentials = () => {
     const questions = [
         {
             name: 'accessToken',
             type: 'input',
             message: 'Enter your access token',
-            validate: function(value) {
-                if (value.length){
+            validate: function (value) {
+                if (value.length) {
                     return true
                 } else {
                     return 'Please enter your access token'
@@ -18,8 +18,8 @@ const askForCredentials = () =>{
             name: 'accountId',
             type: 'input',
             message: 'Enter your Harvest account id',
-            validate: function(value) {
-                if (value.length){
+            validate: function (value) {
+                if (value.length) {
                     return true
                 } else {
                     return 'Please enter your Harvest account id'
@@ -30,8 +30,8 @@ const askForCredentials = () =>{
             name: 'userAgent',
             type: 'input',
             message: 'Enter your user agent',
-            validate: function(value) {
-                if (value.length){
+            validate: function (value) {
+                if (value.length) {
                     return true
                 } else {
                     return 'Please enter your user agent'
@@ -49,7 +49,7 @@ const askForDates = () => {
             name: 'date1',
             message: 'Enter from date: (Format yyyy mm dd)',
             filter: value => {
-                return value.replace(/ /g,'')
+                return value.replace(/ /g, '')
             }
         },
         {
@@ -57,7 +57,7 @@ const askForDates = () => {
             name: 'date2',
             message: 'Enter to date: (Format yyyy mm dd)',
             filter: value => {
-                return value.replace(/ /g,'')
+                return value.replace(/ /g, '')
             }
         },
     ]
@@ -70,8 +70,8 @@ const askForProjectId = () => {
             name: 'projectId',
             type: 'input',
             message: 'Enter the project ID: ',
-            validate: function(value) {
-                if (value.length){
+            validate: function (value) {
+                if (value.length) {
                     return true
                 } else {
                     return 'Please enter a valid project ID'
@@ -112,7 +112,6 @@ const askForProject = (projects) => {
     ]
     return inquirer.prompt(questions)
 }
-
 
 
 module.exports = {
