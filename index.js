@@ -58,7 +58,9 @@ const run = async () => {
         case argv._.length >= 1:
             const [id, dateFrom, dateTo] = argv._
             date = handleDate(dateFrom, dateTo, argv.l)
-            result = await harvest.getEntriesForProject(id, date)
+            result = isId(id)
+                ? await harvest.getEntriesForProject(id, date)
+                : await harvest.getEntriesForProjectWithName(id, date)
             break
         case argv.g:
             result = await harvest.getProjects()
