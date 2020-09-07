@@ -29,4 +29,11 @@ describe('harvest', function() {
 
     })
   })
+  describe('getProjects', function() {
+    it('should not crash', async function() {
+      expect(() => harvest.getProjects()).to.not.throw()
+
+    })
+  })
+
 })
