@@ -3,5 +3,5 @@
     "github>orangitfi/renovate-config",
     ":assignee(uberballo)",
     ":reviewer(uberballo)"
-  ],
+  ]
 }
