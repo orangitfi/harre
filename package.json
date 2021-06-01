@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "0.21.1",
-    "configstore": "5.0.1",
+    "configstore": "6.0.0",
     "inquirer": "8.1.0",
     "json-csv": "3.0.6",
     "minimist": "1.2.5"
