@@ -13,7 +13,7 @@
     "axios": "0.21.1",
     "configstore": "6.0.0",
     "inquirer": "8.1.2",
-    "json-csv": "3.0.6",
+    "json-csv": "4.0.2",
     "minimist": "1.2.5"
   },
   "bin": {
