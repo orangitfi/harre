@@ -10,7 +10,7 @@
   "author": "Kasper Paavolainen",
   "license": "ISC",
   "dependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "configstore": "6.0.0",
     "inquirer": "8.1.2",
     "json-csv": "3.0.6",
