@@ -20,7 +20,7 @@
     "harre": "./index.js"
   },
   "devDependencies": {
-    "chai": "4.3.4",
+    "chai": "4.3.10",
     "mocha": "9.0.3",
     "prettier": "2.3.2"
   }
