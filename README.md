@@ -1,3 +1,5 @@
+#Depricated, harvest no longer in use
+
 # Harvest Report CLI  
 CLI tool that allows you to retrieve time entries for a specific project.  
 
